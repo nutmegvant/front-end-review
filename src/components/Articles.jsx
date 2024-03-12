@@ -15,22 +15,24 @@ function Articles () {
     },[])
 
     if(isLoading)  {
-        return <header>LOADING</header>;
+        return (
+            <>
+            <div className="loading-div">
+            <h1>Loading...</h1>
+            </div>
+            <img className="loading-gif" src="https://i.pinimg.com/originals/ef/03/b0/ef03b0a4a976cd31d660d0879d326592.gif">
+            </img>
+            </>)
     } else {
         return(
-            <div>
+            <div id="article-list">
                 <h1>Articles</h1>
                 {articles.map((article) => {
-
                     return <ArticleCard article_title = {article.title} article_id={article.article_id} />
                 })}
             </div>
         )
-
-            
     }
-        
-    
 }
 
 export default Articles;
