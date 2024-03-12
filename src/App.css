@@ -1,24 +1,35 @@
 * {
-  align-items: center;
   text-align: center;
+}
+
+body {
+  place-items: center;
+  height:fit-content;
+  width:fit-content;
+  margin-top: 0%;
+  padding: 5%;
 }
 
 header {
   font-weight: bold;
   text-align: center;
   font-size:x-large;
-
   border:solid rgb(102, 163, 191) 3px;
   border-radius: 20px;
-
   width:fit-content;
-  display: block;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 0;
 }
 
-.navigation-bar{
+.nav-link {
+  margin: 20px;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+}
 
+.nav-link:hover {
   margin: 20px;
   align-items: center;
   text-decoration: none;
@@ -31,15 +42,91 @@ header {
   margin: 1px;
 }
 
-#single-article-title {
+.single-article-title {
   text-align: center;
   font-family: Raleway;
-
 }
 
-#single-article-body {
+.single-article-body {
   text-align: justify;
   font-family: Raleway;
   padding: 20px;
   margin: auto;
+  font-size:larger;
+}
+
+.single-article-author {
+  font-family: Raleway;
+  padding: 20px;
+  margin: auto;
+  font-size:larger;
+}
+
+.article-card {
+  align-items: center;
+  font-weight: bold;
+  padding: 1px;
+  cursor: pointer;
+}
+
+.article-list {
+  align-items: center;
+}
+
+div#root {
+  align-items: center;
+  padding: 0%;
+  margin: 0 auto;
+}
+
+.art-card-link {
+  text-decoration: none;
+  color: black;
+  font-size: medium;
+  padding: 1px;
+}
+
+.art-card-link:hover {
+  text-shadow: 1px 2px 2px #AA99FF;
+  color: black;
+  font-size: medium;
+  padding: 1px;
+}
+
+.loading-div {
+  text-decoration: none;
+  color: black;
+  font-size: large;
+  padding: 1px;
+}
+
+.loading-gif{
+  height: 300px;
+  width: 250px;
+}
+
+.comment-div {
+  border:solid rgb(102, 163, 191) 3px;
+  border-radius: 20px;
+  margin: 3px;
+  padding: 1px;
+  background-color: solid rgb(144, 203, 230) 3px;
+}
+
+.p-author {
+  font-size:medium;
+  padding: 1px;
+  font-weight: bold;
+}
+
+.p-body {
+  font-size: small;
+  padding: 1px;
+}
+
+.big-comments{
+  font-size:larger;
+  padding: 1px;
+  font-weight: bold;
+  font-family: Raleway;
 }

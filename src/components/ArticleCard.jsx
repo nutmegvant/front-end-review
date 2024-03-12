@@ -1,14 +1,12 @@
-//import {withRouter} from 'react-router-dom';
-
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function ArticleCard ({article_title, article_id}) {
-    const navigateTo = useNavigate();
-
     return (
-        <div onClick={() => { console.log(article_id, 'clickedId'); navigateTo(`/articles/${article_id}`)}}>
-            Article title: {article_title}
+        <Link className="art-card-link" to={`/articles/${article_id}`}>
+        <div>
+            {article_title}
         </div>
+        </Link>
     )
 }
 export default ArticleCard;
