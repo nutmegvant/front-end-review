@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { getArticleById, updateVotes } from '../api';
 import { useState, useEffect } from 'react'
 import CommentsList from './CommentsList';
+import NewCommentForm from './NewCommentForm';
 
 
 function SingleArticle (){
@@ -46,6 +47,9 @@ function SingleArticle (){
                 <p className="single-article-votes">Votes: {article.votes}</p>
                 <button id="plus-button" className="plus-button" onClick={buttonClick}>+</button>
                 <button id="minus-button" className="minus-button" onClick={buttonClick}>-</button>
+                <div>
+                <NewCommentForm />
+                </div>
                 <div>
                     <CommentsList aritcle_id = {article_id}/>
                 </div>
