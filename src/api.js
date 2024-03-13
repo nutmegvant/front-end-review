@@ -25,4 +25,14 @@ function getCommentsByArticleId (article_id) {
     })
 }
 
-export {getArticles, getArticleById, getCommentsByArticleId}
+function updateVotes (article_id, inc_votes) {
+    console.log(article_id, 'article id')
+    console.log(inc_votes,  'incvotes')
+    return api.patch(`articles/${article_id}`, {inc_votes: inc_votes})
+    .then((response) => {
+        console.log(response.data.article)
+        response.data.article
+    })
+}
+
+export {getArticles, getArticleById, getCommentsByArticleId, updateVotes }
