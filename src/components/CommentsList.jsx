@@ -2,7 +2,7 @@
 import {  getCommentsByArticleId } from '../api';
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
-
+import NewCommentForm from './NewCommentForm';
 
 
 function CommentsList (){
@@ -10,13 +10,17 @@ function CommentsList (){
     const [comments, setComments] = useState([])
     const [isLoading, setIsLoading] = useState(true)
 
-
-    useEffect(() => {
-        getCommentsByArticleId(article_id).then((comments) => {
+    function fetchData(){
+        getCommentsByArticleId(article_id)
+        .then((comments) => {
             setComments(comments)
             setIsLoading(false)
         })
-    },[])
+    }
+
+    useEffect(() => {
+        fetchData()
+    },[fetchData])
 
     if(isLoading)  {
         return (<>
@@ -29,23 +33,25 @@ function CommentsList (){
             )
     } else {
         return(
+            <>
                 <div>
+                    <NewCommentForm fetchData={fetchData}/>
+                </div>
+                <div key="comment-list">
                     <p className="big-comments">Comments:
                     </p> 
-                    {comments.map((comment) => {
+                    {comments.sort(({comment_id:a}, {comment_id:b}) => b-a).map((comment) => {
                         return (
-                        <>
-                        <div key="comment-key" className="comment-div">
-                            <p key="author-key" className="p-author">{comment.author}</p>
-                            <p key="body-key" className="p-body">{comment.body}</p>
+                        <div className="comment-div">
+                            <p className="p-author">{comment.author}</p>
+                            <p className="p-body">{comment.body}</p>
                         </div>
-                        </>
                         )
                     })}
                 </div>
+            </>
             )
-                
-        }
+    }
 }
 
 export default CommentsList;

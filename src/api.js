@@ -32,12 +32,20 @@ function updateVotes (article_id, inc_votes) {
     })
 }
 
+
 function postComment (article_id, author, comment) {
     return api.post(`articles/${article_id}/comments`, {author: author, comment: comment})
     .then((response) => {
-        console.log(response.data.comment, 'success')
         response.data.comment
     })
 }
 
-export {getArticles, getArticleById, getCommentsByArticleId, updateVotes, postComment }
+function getUsers () {
+    return api.get("users")
+    .then((response) => {
+        return response.data.users
+        
+    })
+}
+
+export {getArticles, getArticleById, getCommentsByArticleId, updateVotes, postComment, getUsers }

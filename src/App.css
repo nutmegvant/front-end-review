@@ -163,7 +163,6 @@ header {
   margin: 10px;
   border:solid rgb(195, 133, 216) 3px;
   border-radius: 20px;
-
 }
 
 .comment-username {
@@ -211,4 +210,63 @@ header {
 .article-img {
   width: 200px;
   height: 200px;
+}
+
+.error-msg {
+  color: red;
+  font-weight: bold;
+  font-size: large;
+}
+
+.click-here{
+  padding:10px;
+  margin: 10px;
+  border:solid rgb(195, 133, 216) 3px;
+  border-radius: 20px;
+  font-size: medium;
+  font-family: Raleway;
+  font-weight: bold;
+}
+
+.nav-link1 {
+  color: rgb(197, 153, 212) 3px;
+  text-decoration: none;
+}
+
+.login-img{
+  width: 200px;
+  height: 200px;
+}
+
+.login-form{
+  border:solid rgb(102, 163, 191) 3px;
+  border-radius: 20px;
+  margin: 20px;
+  padding: 20px;
+}
+
+.username-login{
+  font-size: larger;
+  font-family: Raleway;
+  font-weight: bold;
+}
+
+.login-input{
+  margin: 5px;;
+}
+
+.login-button{
+  height: 23px;
+  width: 60px;
+  transition: 0.5s;
+}
+
+.login-button:hover {
+  height: 33px;
+  width: 70px;
+}
+
+.home-ptag{
+  font-size:x-large;
+  font-family: Raleway;
 }
