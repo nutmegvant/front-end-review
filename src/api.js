@@ -26,13 +26,18 @@ function getCommentsByArticleId (article_id) {
 }
 
 function updateVotes (article_id, inc_votes) {
-    console.log(article_id, 'article id')
-    console.log(inc_votes,  'incvotes')
     return api.patch(`articles/${article_id}`, {inc_votes: inc_votes})
     .then((response) => {
-        console.log(response.data.article)
         response.data.article
     })
 }
 
-export {getArticles, getArticleById, getCommentsByArticleId, updateVotes }
+function postComment (article_id, author, comment) {
+    return api.post(`articles/${article_id}/comments`, {author: author, comment: comment})
+    .then((response) => {
+        console.log(response.data.comment, 'success')
+        response.data.comment
+    })
+}
+
+export {getArticles, getArticleById, getCommentsByArticleId, updateVotes, postComment }
