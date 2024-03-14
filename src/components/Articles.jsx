@@ -25,12 +25,15 @@ function Articles () {
             </>)
     } else {
         return(
+            <>
             <div id="article-list">
                 <h1>Articles</h1>
                 {articles.map((article) => {
-                    return <ArticleCard article_title = {article.title} article_id={article.article_id} />
+                    return <ArticleCard key={article.title} article_title = {article.title} article_id={article.article_id} />
                 })}
             </div>
+            <img className="article-img" src="https://jottedbyjena.files.wordpress.com/2020/07/lhjkb.gif"/>
+            </>
         )
     }
 }
