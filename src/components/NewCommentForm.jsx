@@ -1,33 +1,42 @@
 import {postComment} from '../api';
-import {useState} from 'react';
+import {useState, useContext} from 'react';
 import { useParams } from 'react-router-dom';
+import {UserContext}  from '../context/UserContext';
+import {Link} from 'react-router-dom'
 
-function NewCommentForm (){
+
+
+function NewCommentForm ({fetchData}){
     let { article_id } = useParams();
+    const { loggedUser } = useContext(UserContext);
     const [newComment, setNewComment] = useState('');
-    const [username, setUsername] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
 
     function handleSubmit (event) {
         event.preventDefault();
-        postComment(article_id, username, newComment)
-    }
-
-    function handleUsername (event) {
-        setUsername(event.target.value)
+        postComment(article_id, loggedUser.username, newComment)
+        setNewComment('')
+        fetchData()
     }
 
     function handleComment(event) {
         setNewComment(event.target.value)
     }
 
-    return <>
+    if(loggedUser === null ){
+        return (
+            <div className="click-here">
+                Please click 
+                <Link className="nav-link1" to='/login'> HERE </Link>
+                to log in to add a comment
+            </div>
+        )
+    } else {
+        return <>
     <p className="form-title">Add your own opinion</p>
     <form className="comment-form" onSubmit={handleSubmit}>
         <div>
-            <label className="comment-username"> Username: 
+            <label className="comment-username"> Username: {loggedUser.username}
             </label>
-            <input className="username-input" type="text" name="user-name" value={username} placeholder='Enter username here...' onChange={handleUsername}/>
         </div>
         <div>
             <label className="comment-comment"> Comment: 
@@ -40,6 +49,7 @@ function NewCommentForm (){
         <img src="https://media.tenor.com/KiQ71OnI4Q8AAAAM/pusheen-fast.gif"/>
     </form>
     </>
+    }
 }
 
 export default NewCommentForm;

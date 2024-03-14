@@ -5,7 +5,7 @@ function Header() {
         <header>
                 <Link className="nav-link" display='none' to='/'>Home</Link>
                 <Link className="nav-link" to='/articles'>Articles</Link>
-                <Link className="nav-link" to='/users'>Users</Link>
+                <Link className="nav-link" to='/login'>Login</Link>
         </header>
     );
 }
