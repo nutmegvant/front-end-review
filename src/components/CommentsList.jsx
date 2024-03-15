@@ -1,14 +1,16 @@
 
-import {  getCommentsByArticleId } from '../api';
-import { useState, useEffect } from 'react'
+import {  getCommentsByArticleId, deleteComment } from '../api';
+import { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom';
 import NewCommentForm from './NewCommentForm';
+import {UserContext}  from '../context/UserContext';
 
 
 function CommentsList (){
     let { article_id } = useParams();
     const [comments, setComments] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+    const { loggedUser } = useContext(UserContext);
 
     function fetchData(){
         getCommentsByArticleId(article_id)
@@ -16,6 +18,10 @@ function CommentsList (){
             setComments(comments)
             setIsLoading(false)
         })
+    }
+
+    function handleDelete (comment_id){
+        deleteComment(comment_id)
     }
 
     useEffect(() => {
@@ -41,10 +47,15 @@ function CommentsList (){
                     <p className="big-comments">Comments:
                     </p> 
                     {comments.sort(({comment_id:a}, {comment_id:b}) => b-a).map((comment) => {
+                        let allowDelete = false
+                        if (loggedUser !== null && loggedUser.username === comment.author){
+                            allowDelete = true
+                        }
                         return (
                         <div className="comment-div">
                             <p className="p-author">{comment.author}</p>
                             <p className="p-body">{comment.body}</p>
+                            {allowDelete && <button className="delete-button" onClick={()=>handleDelete(comment.comment_id)}>Delete 🗑️</button>}
                         </div>
                         )
                     })}

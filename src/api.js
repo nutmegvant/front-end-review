@@ -48,4 +48,8 @@ function getUsers () {
     })
 }
 
-export {getArticles, getArticleById, getCommentsByArticleId, updateVotes, postComment, getUsers }
+function deleteComment(comment_id) {
+    return api.delete(`comments/${comment_id}`)
+}
+
+export {getArticles, getArticleById, getCommentsByArticleId, updateVotes, postComment, getUsers, deleteComment }

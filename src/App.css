@@ -270,3 +270,15 @@ header {
   font-size:x-large;
   font-family: Raleway;
 }
+
+.delete-button {
+  height: 23px;
+  width: 80px;
+  transition: 0.5s;
+  margin: 10px;
+}
+
+.delete-button:hover{
+  height: 33px;
+  width: 90px;
+}
