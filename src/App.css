@@ -282,3 +282,39 @@ header {
   height: 33px;
   width: 90px;
 }
+
+.logout{
+  margin: 15px;
+  font-weight: bold;
+}
+
+.logout-button {
+  height: 23px;
+  width: 80px;
+  transition: 0.5s;
+  margin: 10px;
+}
+
+.logout-button:hover {
+  height: 33px;
+  width: 90px;
+}
+
+.pusheen-box {
+  width: 200px;
+  height: 200px;
+}
+
+.p-hint {
+  font-size: small;
+  font-family: Raleway;
+  color: black;
+  text-shadow: 1px 2px 2px rgba(244, 94, 222, 0.544);
+}
+
+.user-not {
+  font-size: medium;
+  font-weight: bold;
+  font-family: Raleway;
+  color: red;
+}

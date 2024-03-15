@@ -11,6 +11,8 @@ function CommentsList (){
     const [comments, setComments] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const { loggedUser } = useContext(UserContext);
+    const [deleteError, setDeleteError] = useState(false)
+    const [commentLoadError, setCommentLoadError] = useState(false)
 
     function fetchData(){
         getCommentsByArticleId(article_id)
@@ -18,10 +20,16 @@ function CommentsList (){
             setComments(comments)
             setIsLoading(false)
         })
+        .catch(() => {
+            setCommentLoadError(true)
+        })
     }
 
     function handleDelete (comment_id){
         deleteComment(comment_id)
+        .catch(() => {
+            setDeleteError(true)
+        })
     }
 
     useEffect(() => {
@@ -39,28 +47,34 @@ function CommentsList (){
             )
     } else {
         return(
-            <>
-                <div>
-                    <NewCommentForm fetchData={fetchData}/>
-                </div>
-                <div key="comment-list">
-                    <p className="big-comments">Comments:
-                    </p> 
-                    {comments.sort(({comment_id:a}, {comment_id:b}) => b-a).map((comment) => {
-                        let allowDelete = false
-                        if (loggedUser !== null && loggedUser.username === comment.author){
-                            allowDelete = true
-                        }
-                        return (
-                        <div className="comment-div">
-                            <p className="p-author">{comment.author}</p>
-                            <p className="p-body">{comment.body}</p>
-                            {allowDelete && <button className="delete-button" onClick={()=>handleDelete(comment.comment_id)}>Delete 🗑️</button>}
-                        </div>
-                        )
-                    })}
-                </div>
-            </>
+                <>
+                {commentLoadError && (<div className="error-msg">
+                    An error occured when loading comments
+                    </div>)}
+                    <div>
+                        <NewCommentForm fetchData={fetchData}/>
+                    </div>
+                    <div key="comment-list">
+                        <p className="big-comments">Comments:
+                        </p> 
+                        {comments.sort(({comment_id:a}, {comment_id:b}) => b-a).map((comment) => {
+                            let allowDelete = false
+                            if (loggedUser !== null && loggedUser.username === comment.author){
+                                allowDelete = true
+                            }
+                            return (
+                            <div className="comment-div">
+                                <p className="p-author">{comment.author}</p>
+                                <p className="p-body">{comment.body}</p>
+                                {allowDelete && <button className="delete-button" onClick={()=>handleDelete(comment.comment_id)}>Delete 🗑️</button>}
+                                {deleteError && (<div className="error-msg">
+                                        An error occured when deleting a comment
+                                    </div>)}
+                            </div>
+                            )
+                        })}
+                    </div>
+                </>
             )
     }
 }

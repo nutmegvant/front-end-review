@@ -1,16 +1,20 @@
-import {useState, useEffect} from 'react';
-import {getArticles} from '../api'
+import { useState, useEffect } from 'react';
+import { getArticles } from '../api'
 import ArticleCard from './ArticleCard';
 
 function Articles () {
-
     const [articles, setArticles] = useState({})
     const [isLoading, setIsLoading] = useState(true)
+    const [articleLoadError, setArticleLoadError] = useState(false)
 
     useEffect(() => {
-        getArticles().then((articles) => {
+        getArticles()
+        .then((articles) => {
             setArticles(articles)
             setIsLoading(false)
+        })
+        .catch(() => {
+            setArticleLoadError(true)
         })
     },[])
 
@@ -25,15 +29,18 @@ function Articles () {
             </>)
     } else {
         return(
-            <>
-            <div id="article-list">
-                <h1>Articles</h1>
-                {articles.map((article) => {
-                    return <ArticleCard key={article.title} article_title = {article.title} article_id={article.article_id} />
-                })}
-            </div>
-            <img className="article-img" src="https://jottedbyjena.files.wordpress.com/2020/07/lhjkb.gif"/>
-            </>
+                <>
+                    {articleLoadError && (<div className="error-msg">
+                    An error occured when loading articles
+                    </div>)}
+                    <div id="article-list">
+                        <h1>Articles</h1>
+                        {articles.map((article) => {
+                            return <ArticleCard key={article.title} article_title = {article.title} article_id={article.article_id} />
+                        })}
+                    </div>
+                    <img className="article-img" src="https://jottedbyjena.files.wordpress.com/2020/07/lhjkb.gif"/>
+                </>
         )
     }
 }
