@@ -11,12 +11,16 @@ function SingleArticle (){
     const [comments, setComments] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [votesError, setVotesError] = useState(false)
+    const [articleError, setArticleError] = useState(false)
 
     useEffect(() => {
         getArticleById(article_id).then((article) => {
             setArticleVotes(article.votes)
             setArticle(article)
             setIsLoading(false)
+            .catch(() => {
+                setArticleError(true)
+            })
         })        
     },[])
 
@@ -52,22 +56,25 @@ function SingleArticle (){
             )
     } else {
         return(
-            <div>
-                <h1 className="single-article-title">{article.title}</h1>
-                <p className="single-article-author">By: {article.author}</p>
-                <p className="single-article-body">{article.body}</p>
-                <p className="single-article-votes">Votes: {articleVotes}</p>
                 <div>
-                <button id="plus-button" className="plus-button" onClick={buttonClick}>+</button>
-                <button id="minus-button" className="minus-button" onClick={buttonClick}>-</button>
-                {votesError && (<div className="error-msg">
-                    An error occured when updating the votes
-                </div>)}
+                    {articleError && (<div className="error-msg">
+                    An error occured when loading the article
+                    </div>)}
+                    <h1 className="single-article-title">{article.title}</h1>
+                    <p className="single-article-author">By: {article.author}</p>
+                    <p className="single-article-body">{article.body}</p>
+                    <p className="single-article-votes">Votes: {articleVotes}</p>
+                    <div>
+                    <button id="plus-button" className="plus-button" onClick={buttonClick}>+</button>
+                    <button id="minus-button" className="minus-button" onClick={buttonClick}>-</button>
+                    {votesError && (<div className="error-msg">
+                        An error occured when updating the votes
+                    </div>)}
+                    </div>
+                    <div>
+                        <CommentsList />
+                    </div>
                 </div>
-                <div>
-                    <CommentsList />
-                </div>
-            </div>
             )
                 
         }
